@@ -14,7 +14,6 @@ function Token (type, value) {
 }
 
 function operate (operator, a, b) {
-    console.log(a + operator + b);  //DEBUG
     switch (operator) {
         case '+':
             return add (a, b);
@@ -56,21 +55,43 @@ function tokenizer (operations) {
 };
 
 // Validates number tokens making sure no more than one point appears.
-validateNumber = (number) => /^\d+(\.\d+)?$/.test(number);
+validateNumber = (number) => /^-?\d+(\.\d+)?$/.test(number);
 
+/*  Validates the operations, including collapsing minus signs and allowing
+    negative numbers.
+    Follows the idea that any expression is formed from an expression,
+    an operator, and another expression, or a number. It must start with a
+    number and then cycle between operator and number until it reaches the end.
+*/
 function validateOperations (operations) {
     let expected = "number";
-    operations.every(token => {
+    for (let index = 0; index < operations.length; index++) {
+        let token = operations[index];
         if (token.type === "number") {
-            if (!validateNumber(token.value)) return false;
+            if (!validateNumber(token.value)) {
+                console.log(token.value + " " + "Error, number not valid.");
+                return false;
+            }
         }
         if (token.type === expected) {
             expected = (token.type === "number" ? "operator" : "number");
-            return true;
+            continue;
         } else {
+            if (token.value === '-' && operations[index+1].type === "number") {
+                operations[index+1].value = 
+                        (-1 * operations[index+1].value).toString();
+                operations.splice(index, 1);
+                index = index - 1;
+                continue;
+            }
+            if (token.value === '-' && operations[index+1].value === "-") {
+                operations.splice(index, 2);
+                index = index - 1;
+                continue;
+            }
             return false;
         }
-    });
+    }
     if (expected === "number") {    // Last token was operator
         return false;
     }
@@ -82,7 +103,6 @@ function validateOperations (operations) {
 function priorityCheck (a, b) {
     let priorityA = (a === '+' || a === '-') ? 1 : 2 ;
     let priorityB = (b === '+' || b === '-') ? 1 : 2 ;
-    //console.log(a + " " + priorityA + ", " + b + " " + priorityB);
     return priorityA > priorityB;
 }
 
