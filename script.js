@@ -8,9 +8,11 @@ isDigit =   (ch) => /\d/.test(ch);
 isPoint =   (ch) => ch === '.';
 isOperator = (ch) => /\+|-|\*|\//.test(ch)
 
-function Token (type, value) {
-    this.type = type;
-    this.value = value;
+class Token {
+    constructor(type, value) {
+        this.type = type;
+        this.value = value;
+    }
 }
 
 function operate (operator, a, b) {
@@ -136,9 +138,8 @@ function solve (operations) {
         } else {
             let b = operands.pop();
             let a = operands.pop();
-            if (item.value === '/' && b === 0) {
+            if (item.value === '/' && b === 0)
                 return "Trying to divide by 0!";
-            }
             operands.push(operate(item.value, a, b));
         }
     }

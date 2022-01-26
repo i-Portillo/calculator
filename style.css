@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Calculator';
+    src: url('Calculator.ttf');
+}
+
+@font-face {
+    font-family: 'Pixelated';
+    src: url('Pixelated.ttf');
+}
+
+p {
+    margin: 5px;
+}
+
 .container {
     
 }
@@ -10,14 +24,27 @@
     border-top-right-radius: 5px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    
 }
 
 .display {
+    border-style: inset;
+    border-radius: 5px;;
     background-color: #aaaa84;
     width: auto;
     height: 100px;
     margin: 20px;
+}
+
+#operations {
+    font-family: 'Pixelated';
+    font-size: xx-large;
+}
+
+#result {
+    font-family: 'Calculator';
+    font-size: 3em;
+    font-weight: 900;
+    text-align: right;
 }
 
 .buttons {
@@ -39,6 +66,14 @@ button {
     font-size: x-large;
     color: white;
     font-weight: bold;
+}
+
+#delete {
+    background-color: #ab8490;
+}
+
+#clear {
+    background-color: #ab8490;
 }
 
 #digit-0 {
