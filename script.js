@@ -128,6 +128,7 @@ function toPostfix (operations) {
 
 function solve (operations) {
     let operands = [];
+    console.log(operations);
     while (operations.length > 0) {
         let item = operations.shift();
         if (item.type === "number") {
@@ -135,6 +136,9 @@ function solve (operations) {
         } else {
             let b = operands.pop();
             let a = operands.pop();
+            if (item.value === '/' && b === 0) {
+                return "Trying to divide by 0!";
+            }
             operands.push(operate(item.value, a, b));
         }
     }
