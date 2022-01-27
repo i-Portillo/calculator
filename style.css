@@ -8,12 +8,20 @@
     src: url('fonts/Pixelated.ttf');
 }
 
+html { 
+    height: 100%;
+    background: rgb(163,189,237);
+    background: linear-gradient(180deg, rgba(163,189,237,1) 50%, rgba(105,145,199,1) 100%); 
+}
+
 p {
     margin: 5px;
+    height: 40px;
 }
 
 .container {
-    
+    display: flex;
+    justify-content: center;
 }
 
 .calculator {
@@ -38,13 +46,16 @@ p {
 #operations {
     font-family: 'Pixelated';
     font-size: xx-large;
+    overflow-x: hidden;
 }
 
 #result {
     font-family: 'Calculator';
-    font-size: 3em;
+    font-size: 2.7em;
     font-weight: 900;
     text-align: right;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .buttons {

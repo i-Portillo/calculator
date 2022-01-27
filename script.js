@@ -139,7 +139,7 @@ function solve (operations) {
             let b = operands.pop();
             let a = operands.pop();
             if (item.value === '/' && b === 0)
-                return "Trying to divide by 0!";
+                return "MATH ERROR";
             operands.push(operate(item.value, a, b));
         }
     }
@@ -149,16 +149,45 @@ function solve (operations) {
 function compute (operations) {
     let tokens = tokenizer(operations);
     if (validateOperations(tokens)) {
-        console.log(solve(toPostfix(tokens)));
+        return (solve(toPostfix(tokens)));
     } else {
-        console.log("SYNTAX ERROR");
+        return ("SYNTAX ERROR");
     }
 };
 
-let operationsDisplay = document.querySelector("#operations");
-operations = operationsDisplay.textContent;
+const operationsDisplay = document.querySelector("#operations");
+
+function addKey (e) {
+    operationsDisplay.textContent += e.target.textContent;
+    operationsDisplay.scrollLeft = operationsDisplay.scrollWidth;
+};
+
+const result = document.querySelector("#result");
+result.textContent = 0;
+
+const numbers = document.querySelectorAll(".number");
+const operators = document.querySelectorAll(".operator");
+
+const buttons = [...numbers].concat([...operators]);
+
+buttons.forEach((button) => {
+    button.addEventListener('click', function (e) {
+        addKey(e);
+    });
+});
+
+const del = document.querySelector("#delete");
+del.addEventListener('click', () => {
+    operationsDisplay.textContent = operationsDisplay.textContent.slice(0,-1);
+});
+
+const clear = document.querySelector("#clear");
+clear.addEventListener('click', () => {
+    operationsDisplay.textContent = " ";
+    result.textContent = "0";
+});
 
 const equal = document.querySelector("#equal");
-equal.addEventListener('click', {
-    // TODO
+equal.addEventListener('click', function (e) {
+    result.textContent = compute(operationsDisplay.textContent);
 });
