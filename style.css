@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Calculator';
-    src: url('Calculator.ttf');
+    src: url('fonts/Calculator.ttf');
 }
 
 @font-face {
     font-family: 'Pixelated';
-    src: url('Pixelated.ttf');
+    src: url('fonts/Pixelated.ttf');
 }
 
 p {
