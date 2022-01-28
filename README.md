@@ -1,5 +1,5 @@
 ## Description
-Simple calculator following the Odin Project instructions but with a twist. I happened to have my calculator nearby and tried to replicate its functions. It has a buffer for the operations and evaluates them in one step. First it tokenizes the buffer and the validates the operations. After that it converts the operations to postfix so that it evaluates the operations in the correct order.
+Simple calculator following the Odin Project instructions but with a twist. I happened to have my calculator nearby and tried to replicate its functions. It has a buffer for the operations and evaluates them all in one step. First it tokenizes the buffer and the validates the operations. After that it converts the operations to postfix so that it evaluates the operations in the correct order.
 
 ## To do list
 * Add parentheses.
